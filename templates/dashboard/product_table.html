@@ -1,0 +1,56 @@
+<div class="card MyTable">
+    <div class="card-header">
+        <h5>List of Product</h5>
+    </div>
+    <div class="card-block" style="padding: 20px 25px;">
+
+        <table id="product_table_datatable" class="display nowrap" style="width:100%">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>category</th>
+                    <th>Quantity</th>
+                    <th>Added By</th>
+                    <th>Created At</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td><img class="rounded-circle" style="width:40px; object-fit: cover;" src="/media/Product_Images/{{ product.image }}" alt="{{ product.name }}"></td>
+                   
+                    <td class="">{{ product.name }}</td>
+                    <td class="text-muted">{{ product.category__category_name }}</td>
+                    <td class="text-muted">{{ product.quantity }}</td>
+                    <td class="text-muted">{{ product.user__first_name }}</td>
+                    <td class="text-muted">{{ product.created_at }}</td>
+                    <td>
+                        <a href="#product_edit_modal" data-toggle="modal" title="Edit Product"
+                            class="label theme-bg text-white rounded f-12" onclick="get_data({'product_id': '{{ product.id}}','product_edit_name':'{{ product.name }}','product_edit_quantity':'{{ product.quantity }}','select_option':{'product_edit_category':'{{ product.category }}'},'image':{'product_image_preview':'/media/Product_Images/{{ product.image }}'}})">Edit</a>
+                        <a href="javascript:void" title="Delete Product"
+                            class="label theme-bg2 text-white rounded f-12" onclick="get_data({'modal':'delete_product_modal','product_id_delete':'{{ product.id }}'})">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <!-- <tfoot>
+                <tr>
+                    <td class="font-weight-bold">Total</td>
+                    <td>12</td>
+                    <td></td>
+                    <td>28</td>
+                    <td></td>
+                </tr>
+            </tfoot> -->
+        </table>
+        
+    </div>
+</div>
+<script>
+    $('#product_table_datatable').DataTable({
+            scrollY: 350,
+            scrollX: true,
+          });
+</script>

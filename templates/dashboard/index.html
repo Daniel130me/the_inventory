@@ -1,0 +1,186 @@
+{% extends 'components/base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<!-- [ Pre-loader ] start -->
+<div class="loader-bg">
+    <div class="loader-track">
+        <div class="loader-fill"></div>
+    </div>
+</div>
+<!-- [ Pre-loader ] End -->
+
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <!-- [ breadcrumb ] start -->
+
+                <!-- [ breadcrumb ] end -->
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ Main Content ] start -->
+                        <div class="row">
+
+                            <!--[ Recent Users ] start-->
+                            <!-- <div class="row"> -->
+                            <div class="col-xl-8 col-md-6">
+                                <div class="card MyTable mb-5">
+                                    <div class="card-header d-flex justify-content-between">
+                                        <h5>Recent Orders</h5>
+                                        <a href="{% url 'dashboard-order' %}">See More</a>
+                                    </div>
+                                    <div class="card-block px-0 py-3">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="border-top-0"></th>
+                                                        <th class="border-top-0">Product</th>
+                                                        <th class="border-top-0">Category</th>
+                                                        <th class="border-top-0">Quantity</th>
+                                                        <th class="border-top-0">Ordered by</th>
+                                                        <th class="border-top-0">Date Ordered</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for order in orders %}
+                                                    <tr>
+                                                        <td>
+                                                            {% if order.product_id_id__image == 'product_avatar.png' %}
+                                                            <img class="rounded-circle" style="width:40px;"
+                                                                src="/media/Product_Images/{{ order.product_id_id__image }}"
+                                                                alt="{{ order.product_id_id__name }}">
+                                                            {% else %}
+                                                            <img class="rounded-circle" style="width:40px;"
+                                                                src="/media/{{ order.product_id_id__image }}"
+                                                                alt="{{ order.product_id_id__name }}">
+                                                            {% endif %}
+                                                        </td>
+                                                        <td class="text-muted">{{ order.product_id_id__name }}</td>
+                                                        <td class="text-muted">{{ order.product_id_id__category__category_name }}</td>
+                                                        <td class="text-muted">{{ order.quantity }}</td>
+                                                        <td class="text-muted">{{ order.ordered_by_id__first_name }}
+                                                        </td>
+                                                        <td class="text-muted">{{ order.created_at }}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                                <tfoot style="border-top: 1px solid black;">
+                                                    <tr>
+                                                        <td class="font-weight-bold">Total</td>
+                                                        <td class="font-weight-bold">{{ total_orders }}</td>
+                                                        <td></td>
+                                                        <td class="font-weight-bold">{{ total_quantity }}</td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card MyTable mb-5">
+                                    <div class="card-header d-flex justify-content-between">
+                                        <h5>Product</h5>
+                                        <a href="{% url 'dashboard-products' %}">See More</a>
+                                    </div>
+                                    <div class="card-block px-0 py-3">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="border-top-0"></th>
+                                                        <th class="border-top-0">Name</th>
+                                                        <th class="border-top-0">Category</th>
+                                                        <th class="border-top-0">Quantity</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for product in products %}
+                                                    <tr>
+                                                        <td><img class="rounded-circle" style="width:40px; object-fit: cover;" src="/media/Product_Images/{{ product.image }}" alt="{{ product.name }}"></td>
+                                                       
+                                                        <td class="">{{ product.name }}</td>
+                                                        <td class="text-muted">{{ product.category__category_name }}</td>
+                                                        <td class="text-muted">{{ product.quantity }}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                                <tfoot style="border-top: 1px solid black;">
+                                                    <tr>
+                                                        <td class="font-weight-bold">Total</td>
+                                                        <td class="font-weight-bold">{{ total_product }}</td>
+                                                        <td></td>
+                                                        <td class="font-weight-bold">{{ total_p_quantity }}</td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--[ Recent Users ] end-->
+
+                            <!-- [ statistics year chart ] start -->
+                            <div class="col-xl-4 col-md-6">
+                                <!--[ daily sales section ] start-->
+                                <!-- <div class=""> -->
+                                <div class="card">
+                                    <div class="card-header d-flex justify-content-between">
+                                        <h5>Staff</h5>
+                                        <a href="{% url 'user-user' %}">See More</a>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="accordion" id="profile_accordion">
+                                            {% for user in users %}
+                                            <div class="d-flex justify-content-between">
+                                                {% if user.profile__image == 'avatar.png' %}
+                                                <p class="mb-3"><img style="width: 35px; border-radius: 50px;"
+                                                        class="mr-3"
+                                                        src="/media/Profile_Images/{{user.profile__image }}"
+                                                        alt="{{ user.profile__image }}">{{ user.first_name }}</p>
+                                                {% else %}
+                                                <p class="mb-3"><img style="width: 35px; border-radius: 50px;"
+                                                        class="mr-3" src="/media/{{ user.profile__image }}"
+                                                        alt="{{ user.profile__image }}">{{ user.first_name }}</p>
+                                                {% endif %}
+                                                <a href="#!" class="text-secondary align-self-center"
+                                                    style="font-size: 22px;" data-toggle="collapse"
+                                                    data-target="#{{ user.id }}" aria-expanded="true"
+                                                    aria-controls=""><i class="feather icon-chevron-down"></i></a>
+                                            </div>
+                                            <div id="{{ user.id }}" style="margin-left: 3px;" class="py-3 collapse"
+                                                aria-labelledby="" data-parent="#profile_accordion">
+                                                <div class="mb-3">
+                                                    <i class="feather icon-mail mr-2"></i>
+                                                    <a href="mailto:johndoe@gmail.com" class="text-dark">{{ user.email }}</a>
+                                                </div>
+                                                <div class="">
+                                                    <i class="feather icon-phone mr-2"></i>
+                                                    <a href="tel:+234890895785" class="text-dark">{{ user.profile__phone }}</p>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+
+
+
+
+                    </div>
+                    <!-- [ Main Content ] end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- [ Main Content ] end -->
+{% endblock %}

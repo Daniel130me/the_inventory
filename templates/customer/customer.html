@@ -1,0 +1,121 @@
+{% extends 'components/base2.html' %}
+
+{% block title %}Customer{% endblock %}
+
+{% block content %}
+<!-- [ Header ] start -->
+<header class="navbar pcoded-header navbar-expand-lg navbar-light w-100 ml-0">
+    <a class="mobile-menu" id="mobile-header" href="javascript:">
+        <i class="feather icon-more-horizontal"></i>
+    </a>
+    <div class="collapse navbar-collapse bg-white">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <h4 class="pl-3 pl-sm-0"><a href="javascript:void">{{ request.session.company }}</a></h4>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li>
+                <div class="dropdown drp-user">
+                    <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon feather icon-user"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right profile-notification">
+                        <div class="pro-head" style="background-color: #ffffff">
+                            {% if user.profile.image == 'avatar.png' %}
+                            <a href="{% url 'user-profile' %}"><img src="/media/Profile_Images/{{ user.profile.image }}"
+                                    class="img-radius" alt="{{ user.profile.image}}">
+                                <span class="">{{ user.first_name }}</span></a>
+                            {% else %}
+                            <a href="{% url 'user-profile' %}"><img src="{{ user.profile.image.url }}"
+                                    class="img-radius" alt="{{ user.profile.image }}">
+                                <span class="">{{ user.first_name }}</span></a>
+                            {% endif %}
+                        </div>
+                        <div class="p-3">
+                            <a href="{% url 'user-logout' %}" class="dud-logout" style="font-size: 14px;"
+                                title="Logout">
+                                <i class="feather icon-log-out mr-3"></i>Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</header>
+<!-- [ Header ] end -->
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container ml-0 w-100" id="customer">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <!-- [ breadcrumb ] start -->
+                <div class="page-header">
+                    <div class="page-block">
+                        <div class="row align-items-center">
+                            <div class="col-md-12">
+                                <div class="page-header-title">
+                                    <h5 class="m-b-10">Manage Order</h5>
+                                </div>
+                                <ul class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html"><i
+                                                class="feather icon-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a href="javascript:">Manage Order</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- [ breadcrumb ] end -->
+
+                <!-- ---------------------------------------------------------------------------------------------------------------- -->
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ Main Content ] start -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Order Request</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form action="/add_order_request/" method="POST" class="reg_login_form">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <label for="product_customer_order">Product</label>
+                                                <select name="product_id" required id="product_customer_order"
+                                                    class="form-control">
+                                                    <option value="">Select Product</option>
+                                                    {% for product in products %}
+                                                    <option value="{{ product.id }}">{{ product.name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="quantity_customer_order">Quantity</label>
+                                                <input class="form-control" autocomplete="on" title="Quantity"
+                                                    type="number" name="quantity" placeholder="e.g. 12"
+                                                    id="quantity_customer_order">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <input type="submit" data-name="Request Order"
+                                                    class="mt-3 w-100 btn label theme-bg text-white f-12"
+                                                    title="Send order request" value="Request Order">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8" id="customer_order_table"></div>
+                        </div>
+                        <!-- [ Main Content ] end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- [ Main Content ] end -->
+{% endblock %}

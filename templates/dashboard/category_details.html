@@ -1,0 +1,6 @@
+{% for category in categories %}
+<div class="d-flex justify-content-between py-2">
+    <p class="mb-0">{{ category.category_name }}</p>
+    <button type="button" onclick="get_data({'modal':'category_action_modal','edit_category_name':'{{ category.category_name }}','edit_category_id':'{{ category.id }}'})" class="feather icon-more-vertical float-right text-muted" style="border: none; border-radius: 10px; background: #f4f7fa; padding: 8px;"></button>
+ </div>
+ {% endfor %}

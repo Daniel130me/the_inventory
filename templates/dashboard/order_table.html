@@ -1,0 +1,54 @@
+<table id="order_list_table" class="display nowrap" style="width:100%">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Product</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th style="width: 100px;">Status</th>
+            <th>Ordered by</th>
+            <th>Date Ordered</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>
+                {% if order.product_id_id__image == 'product_avatar.png' %}
+                <img class="rounded-circle" style="width:40px;" src="/media/Product_Images/{{ order.product_id_id__image }}"
+                    alt="{{ order.product_id_id__name }}">
+                {% else %}
+                <img class="rounded-circle" style="width:40px;" src="/media/{{ order.product_id_id__image }}"
+                    alt="{{ order.product_id_id__name }}">
+                {% endif %}
+            </td>
+            <td class="text-muted">{{ order.product_id_id__name }}</td>
+            <td class="text-muted">{{ order.product_id_id__category__category_name }}</td>
+            <td class="text-muted">{{ order.quantity }}</td>
+            <td>
+                <select name="" onchange="change_status_priv(event,'{{ order.id }}','order_status')" class="form-control" style="width: auto;" id="">
+                    <option selected value="{{ order.status }}">{{ order.status }}</option>
+                    <option  value="Canceled">Canceled</option>
+                    <option  value="Pending">Pending</option>
+                    <option value="Confirmed">Confirmed</option>
+                    <option value="Delivered">Delivered</option>
+                </select>
+            </td>
+            <td class="text-muted">{{ order.ordered_by_id__first_name }}</td>
+            <td class="text-muted">{{ order.created_at }}</td>
+            <td>
+                <a href="javacript:void" title="Delete Order"
+                                class="rounded label theme-bg2 btn-sm text-white f-12" onclick="get_data({'modal':'delete_order_modal','order_id_delete':'{{ order.id }}'})">Delete</a>
+            </td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<script>
+    $('#order_list_table').DataTable({
+        scrollY: 350,
+        scrollX: true,
+    });
+</script>

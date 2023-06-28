@@ -1,0 +1,82 @@
+{% extends 'components/base.html' %}
+
+{% block title %}Order{% endblock %}
+
+{% block content %}
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <!-- [ breadcrumb ] start -->
+                <div class="page-header">
+                    <div class="page-block">
+                        <div class="row align-items-center">
+                            <div class="col-md-12">
+                                <div class="page-header-title">
+                                    <h5 class="m-b-10">Manage Order</h5>
+                                </div>
+                                <ul class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{% url 'dashboard-index' %}"><i
+                                        class="feather icon-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a href="javascript:">Manage Order</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- [ breadcrumb ] end -->
+
+                <!-- ---------------------------------------------------------------------------------------------------------------- -->
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ Main Content ] start -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card Recent-Users">
+                                    <div class="card-header">
+                                        <h5>List of Order</h5>
+                                    </div>
+                                    <div class="card-block" style="padding: 20px 25px;">
+
+                                        <div class="table-responsive" id="order_table">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- [ Main Content ] end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- [ Main Content ] end -->
+
+<!-- [ delete order modal] start -->
+<div class="modal fade" id="delete_order_modal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p class="mb-0">This action will delete this order permanently</p>
+            </div>
+            <div class="modal-footer">
+                <form action="/delete_order/" method="post" class="reg_login_form">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" id="order_id_delete">
+                    <div class="d-flex">
+                        <input type="submit" data-name="Delete Order"
+                                    class="submit_btn label border-0 theme-bg text-white f-12" title="Delete Order"
+                                    value="Delete Order">
+                        <input type="button" data-dismiss="modal" class="label border-0 theme-bg2 text-white rounded f-12" value="Cancel">
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- [ delete order modal ] end -->
+{% endblock %}

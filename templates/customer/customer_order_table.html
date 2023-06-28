@@ -1,0 +1,70 @@
+<div class="card MyTable">
+    <div class="card-header">
+        <h5>List of Orders</h5>
+    </div>
+    <div class="card-block" style="padding: 20px 25px;">
+
+        <table id="customer_table" class="display nowrap" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        </td>
+                    <th>Product</td>
+                    <td>Category</td>
+                    <td>Quantity</td>
+                    <td>Status</td>
+                    <td>Date Ordered</td>
+                    <td>Actions</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+
+                <tr>
+                    <td><img class="rounded-circle" style="width:40px;"
+                            src="/media/Product_Images/{{ order.product_id__image }}" alt="activity-user">
+                    </td>
+                    <td class="text-muted">{{ order.product_id__name }}</td>
+                    <td class="text-muted">{{ order.product_id__category__category_name }} </td>
+                    <td class="text-muted">{{ order.quantity }}</td>
+                    {% if order.status == 'Canceled' %}
+                    <td class="status text-danger">{{ order.status }}</td>
+                    {% elif order.status == 'Confirmed' %}
+                    <td class="status text-primary">{{ order.status }}</td>
+                    {% elif order.status == 'Delivered' %}
+                    <td class="status text-success">{{ order.status }}</td>
+                    {% else %}
+                    <td class="status text-muted">{{ order.status }}</td>
+                    {% endif %}
+                    <td class="text-muted">{{ order.created_at }}</td>
+                    {% if order.status == 'Canceled' %}
+                    <td class="actions">
+                        <a href="javascript:void" data-id="{{ order.id }}" title="Reorder"
+                            class="label theme-bg text-white rounded f-12 cancel_reorder_btn">Reorder</a>
+                    </td>
+                    {% else %}
+                    <td class="actions">
+                        <a href="javascript:void" data-id="{{ order.id }}" title="Cancel Order"
+                            class="label theme-bg2 text-white rounded f-12 cancel_reorder_btn">Cancel Order</a>
+                    </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+
+            </tbody>
+            <!-- <tfoot style="border-top: 1px solid black;">
+                <tr>
+                    <td class="font-weight-bold">Total</td>
+                    <td>12</td>
+                    <td></td>
+                    <td>28</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tfoot> -->
+        </table>
+    </div>
+</div>
+<script>
+    customer_table_script()
+</script>

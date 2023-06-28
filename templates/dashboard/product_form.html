@@ -1,0 +1,40 @@
+
+    <!-- <div class="previews"></div> -->
+    <div class="form-group" id="" style="position: relative;">
+        <img id="" src="/media/Product_Images/product_avatar.png" alt="Product Photo" style="width: 100%;">
+        <input type="file" name="image" id="product_image" style="display: none;" onchange="preview_image(event)"
+            class="form-control">
+        <label for="product_image"
+            style="position:absolute; color: transparent; width: 100%; height: 100%; left:0;">Select
+            Photo</label>
+        <p id=""></p>
+    </div>
+
+    <!-- Now setup your input fields -->
+    <!-- <input type="email" name="username" />
+                                            <input type="password" name="password" /> -->
+    <div class="form-group">
+        <label for="name">Product Name <span class="text-danger">*</span></label>
+        <input class="form-control" placeholder="Product Name" id="product_name" title="Type name of product" type="text" autocomplete="on"
+            name="name">
+    </div>
+    <div class="form-group">
+        <label for="category">Category<span class="text-danger">*</span></label>
+        <select class="form-control"  name="category" aria-label="Category" required aria-required="true"
+            id="product_category" title="select product category">
+            <option value="">Select category</option>
+            {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.category_name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="quantity">Quantity</label>
+        <input class="form-control" placeholder="e.g. 12" title="Quantity" type="number" name="quantity" id="product_quantity"
+            autocomplete="on">
+    </div>
+    <div class="form-group">
+        <input type="submit" data-name="Add Product" autocomplete="on"
+            class="submit_btn mt-3 w-100 btn label theme-bg text-white f-12" title="Submit product details"
+            value="Add Product">
+    </div>

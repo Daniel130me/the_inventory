@@ -1,0 +1,103 @@
+<div class="card MyTable">
+    <div class="card-header">
+        <h5>List of Staff</h5>
+        {% if user.is_superuser %}
+        <button type="button" data-toggle="modal" data-target="#staff_add_modal" class="float-right rounded label border-0 theme-bg text-white f-12">Add User</button>
+        {% endif %}
+    </div>
+    <div class="card-block px-0 py-3">
+        <div class="card-block" style="padding: 20px 25px;">
+            <table id="staff_table" class="display nowrap" style="width:100%">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone number</th>
+                        {% if request.user.is_superuser %}
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for staff in users %}
+                    <tr>
+                        <td>
+                            {% if staff.profile.image == 'avatar.png' %}
+                            <img class="rounded-circle" style="width:40px;"
+                                src="/media/Profile_Images/{{ staff.profile.image }}" alt="{{ staff.first_name }}">
+                            {% else %}
+                            <img class="rounded-circle" style="width:40px;" src="{{ staff.profile.image.url }}"
+                                alt="{{ staff.first_name }}">
+                            {% endif %}
+                        </td>
+                        <td class="mb-1">{{ staff.first_name }} {{ staff.last_name }}</td>
+                        <td class="text-muted">{{ staff.email }}</td>
+                        <td class="text-muted">{{ staff.profile.phone}}</td>
+
+                        <!-- only current user who is an admin will see these -->
+                        {% if request.user.is_superuser %}
+                        {% if staff.is_superuser %}
+                        <td>
+                            <select name="priviledge" class="form-control p-1" onchange="change_status_priv(event,'{{ staff.id }}','priviledge')">
+                                <option value="1" selected>Admin</option>
+                                <option value="0">Staff</option>
+                            </select>
+                        </td>
+                        {% else %}
+                        <td>
+                            <select name="priviledge" class="form-control p-1" onchange="change_status_priv(event,'{{ staff.id }}','priviledge')">
+                                <option value="1">Admin</option>
+                                <option value="0" selected>Staff</option>
+                            </select>
+                        </td>
+                        {% endif %}
+
+                        <!-- check if this user is an active user -->
+                        {% if staff.is_active %}
+                        <td>
+                            <select name="status" class="form-control p-1" onchange="change_status_priv(event,'{{ staff.id }}','staff_status')">
+                                <option value="1" selected>Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </td>
+                        {% else %}
+                        <td>
+                            <select name="status" class="form-control p-1" onchange="change_status_priv(event,'{{ staff.id }}','staff_status')">
+                                <option value="1">Active</option>
+                                <option value="0" selected>Inactive</option>
+                            </select>
+                        </td>
+                        {% endif %}
+                        <td>
+                            <a href="{{ staff.id }}" title="View Profile"
+                                class="rounded label theme-bg text-white f-12">View</a>
+                            {% if staff.profile.image == 'avatar.png' %}
+                            <a href="javascript:void" title="View Profile"
+                                class="rounded label theme-bg3 text-white f-12" onclick="get_data({'modal':'user_edit_modal','image':{'image_user_edit_preview':'/media/Profile_Images/{{ staff.profile.image }}'},'first_name_user_edit':'{{ staff.first_name }}','last_name_user_edit':'{{ staff.last_name }}','email_user_edit':'{{ staff.email }}','address_user_edit':'{{ staff.profile.address }}', 'phone_user_edit':'{{ staff.profile.phone }}','id_user_edit':'{{ staff.id }}'})">Edit</a>
+                            {% else %}
+                            <a href="javascript:void" title="View Profile"
+                                class="rounded label theme-bg3 text-white f-12" onclick="get_data({'modal':'user_edit_modal','image':{'image_user_edit_preview':'/media/{{ staff.profile.image }}'},'first_name_user_edit':'{{ staff.first_name }}','last_name_user_edit':'{{ staff.last_name }}','email_user_edit':'{{ staff.email }}','address_user_edit':'{{ staff.profile.address }}', 'phone_user_edit':'{{ staff.profile.phone }}','id_user_edit':'{{ staff.id }}'})">Edit</a>
+                            {% endif %}
+                                <a href="javacript:void" title="Delete Staff"
+                                class="rounded label theme-bg2 text-white f-12" onclick="get_data({'modal':'delete_user_modal','user_id_delete':'{{ staff.id }}'})">Delete</a>
+                        </td>
+                        {% endif %}
+                        <!-- staff restriction ends here -->
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#staff_table').DataTable({
+            scrollY: 200,
+            scrollX: true,
+        });
+    });
+</script>

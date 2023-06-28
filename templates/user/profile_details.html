@@ -1,0 +1,35 @@
+<div class="col-sm-3">
+    <div class="card">
+        <div class="card-body">
+            {% if user.profile.image == 'avatar.png' %}
+            <img class="rounded-circle" style="width:100%;" src="/media/Profile_Images/{{ user.profile.image }}" alt="{{ user.first_name }}">
+            {% else %}
+            <img class="rounded-circle" style="width:100%;" src="/media/{{ user.profile.image }}" alt="{{ user.first_name }}">
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="col-sm-9">
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <h3>{{ user.first_name }}  {{ user.last_name }}</h3>
+                </div>
+                <div class="mt-4">
+                    <div class="mb-4">
+                        <label for="email" class="mb-0">Email Address</label>
+                        <p class="text-dark">{{ user.email }}</p>
+                    </div>
+                    <div class="mb-4">
+                        <label for="phone_number" class="mb-0">Phone Number</label>
+                        <p class="text-dark">{{ user.profile.phone|default:'Nil' }}</p>
+                    </div>
+                    <div class="">
+                        <label for="phone_number" class="mb-0">Contact Address</label>
+                        <p class="text-dark">{{ user.profile.address|default:'Nil' }}</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+</div>

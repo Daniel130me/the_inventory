@@ -1,0 +1,75 @@
+{% extends 'components/base2.html' %}
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container ml-0 w-100">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content py-0">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper d-flex justify-content-center align-items-center" style="height: 100vh;">
+                        <!-- [ Main Content ] start -->
+                        <div class="card">
+                            <div class="card-body">
+                                <div style="min-width: 280px; padding: 20px; box-shadow: 0 12px 54px lightgray;">
+                                    <div>
+                                        <h5 class="font-weight-bold">Register</h5>
+                                    </div>
+                                    <!-- [ registration form ] start -->
+                                    <form action="/register/" method="post" enctype="multipart/form-data"
+                                        class="reg_login_form">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label for="first_name">First Name: <span
+                                                    class="text-danger">*</span></label>
+                                            <input class="form-control" placeholder="e.g Daniel" aria-label="First Name" aria-required="true"
+                                                title="First Name" type="text" autocomplete="given-name" name="first_name" id="first_name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="last_name">Last Name: <span class="text-danger">*</span></label>
+                                            <input class="form-control" placeholder="e.g. Kosoko" aria-label="Last Name" aria-required="true"
+                                                required title="Last Name" autocomplete="family-name" required type="Last Name" name="last_name"
+                                                id="last_name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Email: <span class="text-danger">*</span></label>
+                                            <input class="form-control" aria-label="Email" placeholder="e.g. johndoe@gmail.com" aria-required="true" required
+                                                title="Email Address" type="email" name="email" autocomplete="email" id="email">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password1">Password: <span class="text-danger">*</span></label>
+                                            <input class="form-control" aria-label="Password" placeholder="Password" autocomplete="new-password" aria-required="true"
+                                                required title="Your preffered password" type="password"
+                                                name="password1" id="password1">
+                                            <span class="password-strength"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password2">Confirm Password: <span
+                                                    class="text-danger">*</span></label>
+                                            <input class="form-control" aria-label="Confirm Password" placeholder="Password" required
+                                                title="Type password again to confirm" autocomplete="new-password" type="password" name="password2"
+                                                aria-required="true" id="password2">
+                                            <span class="password-strength"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit"
+                                                class="submit_btn mt-3 w-100 btn label theme-bg text-white f-12"
+                                                title="Click to Register" data-name="Register" value="Register">
+                                        </div>
+                                        <p class="mb-0">Already registered? <a href="{% url 'user-login' %}">Sign In</a>
+                                        </p>
+                                    </form>
+                                    <!-- [ regsitration form ] end -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- [ Main Content ] end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- [ Main Content ] end -->
+{% endblock %}

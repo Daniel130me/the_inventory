@@ -1,0 +1,48 @@
+{% extends 'components/base2.html' %}
+{% block title %}Register{% endblock %}
+
+{% block content %} 
+ <!-- [ Main Content ] start -->
+ <div class="pcoded-main-container ml-0 w-100">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content py-0">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper d-flex justify-content-center align-items-center" style="height: 100vh;">
+                        <!-- [ Main Content ] start -->
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div style="min-width: 280px; padding: 20px; box-shadow: 0 12px 54px lightgray;">
+                                            <div>
+                                                <h5 class="font-weight-bold">Login</h5>
+                                            </div>
+                                            <!-- [ form ] start -->
+                                            <form action="/login/" method="post" enctype="multipart/form-data" class="reg_login_form">
+                                                {% csrf_token %}
+                                                <div class="form-group">
+                                                    <label for="email_login">Email: <span class="text-danger">*</span></label>
+                                                    <input class="form-control" placeholder="e.g. johndoe@gmail.com" aria-label="Email" autocomplete="email" required title="Email Address" type="email" name="username" id="email_login">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="password_login">Password: <span class="text-danger">*</span></label>
+                                                    <input class="form-control" placeholder="Password" aria-label="Password" autocomplete="current-password" required title="Your preffered password" type="password" name="password" id="password_login">
+                                                    <span class="password-strength"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="submit" data-name="Login" class="submit_btn mt-3 w-100 btn label theme-bg text-white f-12" title="Click to Sign In" value="Sign In">
+                                                </div>
+                                                <p class="mb-0">No account yet? <a href="{% url 'user-register' %}">Register</a></p>
+                                            </form>
+                                            <!-- [ form ] end -->
+                                        </div>
+                                    </div>
+                                </div>
+                        <!-- [ Main Content ] end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- [ Main Content ] end -->
+{% endblock %}

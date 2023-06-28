@@ -1,0 +1,46 @@
+<!-- [ navigation menu ] start -->
+<nav class="pcoded-navbar" id="navbar_id">
+    <div class="navbar-wrapper">
+        <div class="navbar-brand header-logo">
+            <a href="index.html" class="b-brand">
+                <div class="b-bg">
+                    <i class="feather icon-trending-up"></i>
+                </div>
+                <span class="b-title">Inventory</span>
+            </a>
+            <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+        </div>
+        <div class="navbar-content scroll-div">
+            <ul class="nav pcoded-inner-navbar">
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Navigation</label>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'dashboard-index' %}" class="nav-link "><span class="pcoded-micon"><i
+                                class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'user-user' %}" class="nav-link "><span class="pcoded-micon"><i
+                                class="feather icon-users"></i></span><span class="pcoded-mtext">Staff</span></a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'dashboard-products' %}" class="nav-link "><span class="pcoded-micon"><i
+                                class="feather icon-layers"></i></span><span class="pcoded-mtext">Product</span></a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'dashboard-order' %}" class="nav-link "><span class="pcoded-micon"><i
+                                class="feather icon-bar-chart-2"></i></span><span class="pcoded-mtext">Order</span></a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'user-profile' %}" class="nav-link "><span class="pcoded-micon"><i
+                                class="feather icon-user"></i></span><span class="pcoded-mtext">Profile</span></a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'user-logout' %}" class="nav-link "><span class="pcoded-micon"><i
+                                class="feather icon-log-out"></i></span><span class="pcoded-mtext">Logout</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- [ navigation menu ] end -->
